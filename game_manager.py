@@ -1,4 +1,6 @@
 import requests
+import nltk
+from nltk.corpus import words
 
 # GAME MANAGER INTERFACE
 #   - BEGIN DEF
@@ -26,7 +28,11 @@ class GameInfoManager:
         self.active_game = 'NONE'
         if self.manager:
             del self.manager
-        
+
+
+# ---------------------------      
+# WORDLE GAME MANAGER
+# ---------------------------
 class WordleGameManager:
     ctx = None
     Word = ''
@@ -35,8 +41,11 @@ class WordleGameManager:
     
     
     def __init__(self, ctx):
+        nltk.download('words')
         self.ctx = ctx
         self.Word = self.get_wordle_word()
+        while not self.is_valid_word(self.Word):
+            self.Word = self.get_wordle_word()
         self.Guesses = []
         self.isGameInProgress = True
     
@@ -51,8 +60,13 @@ class WordleGameManager:
     
     async def guess(self, guess):
         if len(guess) != 5:
-            await self.ctx.send('')
+            await self.ctx.send('only enter a 5 letter word')
             return
+        
+        if not self.is_valid_word(guess):
+            await self.ctx.send('only enter a valid english word')
+            return
+            
         guessPattern = ''
         guess = guess.upper()
         # :yellow_square: :blue_square: :green_square:
@@ -101,3 +115,15 @@ class WordleGameManager:
         response = requests.get(url)
         word = response.json()[0]
         return word
+
+    def is_valid_word(self, word):
+        return word.lower() in words.words()
+    
+
+# ---------------------------      
+# TRIVIA GAME MANAGER
+# ---------------------------
+class TriviaGameManager:
+    
+    def __init__(self):
+        return

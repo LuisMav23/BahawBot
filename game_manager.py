@@ -124,6 +124,19 @@ class WordleGameManager:
 # TRIVIA GAME MANAGER
 # ---------------------------
 class TriviaGameManager:
+    questions = []
+    isGameInProgress = False
     
     def __init__(self):
-        return
+        pass
+    
+    async def begin(self):
+        pass
+    
+    async def stop(self):
+        pass
+    
+    async def restart(self):
+        pass
+    
+    

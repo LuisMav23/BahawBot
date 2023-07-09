@@ -22,7 +22,7 @@ bot = commands.Bot(command_prefix='$' ,intents=intents)
 # gets called when bot runs
 @bot.event
 async def on_ready():
-    print(f"Logged in as {bot.user}")
+    print(f'Logged in as {bot.user}')
 
 # a command that begins the game
 @bot.command()

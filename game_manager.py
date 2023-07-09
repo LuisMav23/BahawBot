@@ -1,6 +1,7 @@
 import requests
 
 from wordle_game_manager import WordleGameManager
+from trivia_game_manager import TriviaGameManager
 
 # GAME MANAGER INTERFACE
 #   - BEGIN DEF
@@ -18,6 +19,8 @@ class GameInfoManager:
         
         if self.active_game == 'WORDLE':
             self.manager = WordleGameManager(ctx)
+        if self.active_game == "TRIVIA":
+            self.manager == TriviaGameManager(ctx)
         else:
             self.active_game = 'NONE'
         

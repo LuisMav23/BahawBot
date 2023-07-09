@@ -2,13 +2,14 @@ import requests
 
 
 class TriviaGameManager:
-    categories = {}
-    chosen_category = ''
-    isGameInProgress = False
+    questions_info = {}
+    is_game_in_progress = False
+    ctx = None
     
-    def __init__(self):
+    def __init__(self, ctx):
         self.categories = self.get_categories()
-        isGameInProgress = True
+        self.is_game_in_progress = True
+        self.ctx = ctx
         
     
     async def begin(self):
@@ -24,4 +25,8 @@ class TriviaGameManager:
         return requests.get('https://opentdb.com/api_category.php').json
     
     def get_questions(self):
-        pass
+        response = requests.get('https://opentdb.com/api.php?amount=5&type=multiple').json
+        questions = response['resuslts']
+        info = {
+            
+        }

@@ -2,14 +2,13 @@ import requests
 import nltk
 from nltk.corpus import words
 
-# ---------------------------      
-# WORDLE GAME MANAGER
-# ---------------------------
+''' WORDLE GAME MANAGER '''
+
 class WordleGameManager:
     ctx = None
     Word = ''
     Guesses = []
-    isGameInProgress = False
+    is_game_in_progerss = False
     
     
     def __init__(self, ctx):
@@ -19,7 +18,7 @@ class WordleGameManager:
         while not self.is_valid_word(self.Word):
             self.Word = self.get_wordle_word()
         self.Guesses = []
-        self.isGameInProgress = True
+        self.is_game_in_progerss = True
     
     # sends a message that the game has started
     async def begin(self):
@@ -61,11 +60,11 @@ class WordleGameManager:
             
         if guessPattern == ':green_square: :green_square: :green_square: :green_square: :green_square: ':
             message += '**CONRATULATIONS YOU GUESSED THE WORD**'
-            self.isGameInProgress = False
+            self.is_game_in_progerss = False
         
         if len(self.Guesses) == 6:
             message += f'**You Lost, the word was {self.Word}**'
-            self.isGameInProgress = False
+            self.is_game_in_progerss = False
             
         await self.ctx.send(message)
     
@@ -73,12 +72,12 @@ class WordleGameManager:
         self.ctx = None
         self.Word = ''
         self.Guesses = []
-        self.isGameInProgress = False
+        self.is_game_in_progerss = False
     
     async def restart(self):
         self.Word = self.get_wordle_word()
         self.Guesses = []
-        self.isGameInProgress = True
+        self.is_game_in_progerss = True
         self.ctx.send("restarting game...")
         await self.begin()
     
